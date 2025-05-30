@@ -5,10 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('modal');
     const modal = overlay?.querySelector('.modal-window');
     const form = overlay?.querySelector('.modal-form');
-  
-    function getScrollbarWidth() {
-      return window.innerWidth - document.documentElement.clientWidth;
+    const loader = document.querySelector('.loader');
+
+    function showLoader() {
+        loader?.classList.add('active');
     }
+    function hideLoader() {
+        loader?.classList.remove('active');
+    }
+
+
+    hideLoader(); 
+
+    
   
     function openModal() {
    
@@ -84,11 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
     form?.addEventListener('submit', e => {
       e.preventDefault();
   
-      if (!validateForm()) return;
+        if (!validateForm()) return;
+        showLoader();
   
       setTimeout(() => {
         closeModal();
-        showSuccess();
+          showSuccess();
+          hideLoader();
       }, 500);
     });
   });
